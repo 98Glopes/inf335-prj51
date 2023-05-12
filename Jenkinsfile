@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "cd inf335prj51 && mvn Dmaven.test.failure.ignore=true clean package"
+                sh "cd inf335prj51 && mvn clean package"
 
             }
             
