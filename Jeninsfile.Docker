@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    tools {
+        maven "M3"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                sh "cd inf335prj51 && mvn clean package"
+
+                sh "docker build ./ -t inf335prj52:1.0"
+
+                sh "docker run inf335prj52:1.0"
+
+            }
+            
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts '**/target/*.jar'
+                }
+            }
+        }
+    }
+}
